@@ -25,6 +25,7 @@ contract DnDCharacter is ERC721URIStorage , VRFConsumerBase {
         uint256 charisma;
         uint256 experience;
         string name;
+        string names;
     }
 
     Character [] public characters;
