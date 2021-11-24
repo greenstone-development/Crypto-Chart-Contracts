@@ -1,4 +1,4 @@
-pragma solidity ^0.8.7;
+// SPDX-License-Identifier: MIT
 
 // Import open zeppline contraces for NFTS
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
@@ -9,43 +9,41 @@ import "@chainlink/contracts/src/v0.8/VRFConsumerBase.sol";
 //allows us to interact with chain link data feeds
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 
-contract DnDCharacter is ERC721URIStorage , VRFConsumerBase {
+
+contract PriceChart is ERC721URIStorage , VRFConsumerBase {
+
     AggregatorV3Interface internal priceFeed;
     bytes32 internal keyHash;
     uint256 internal fee;
     address public VRFCoordinator;
     address public LinkToken;
 
-    struct Character{
-        int256 strength;
-        uint256 dexterity;
-        uint256 constitution;
-        uint256 intelligence;
-        uint256 wisdom;
-        uint256 charisma;
-        uint256 experience;
+
+    struct PriceChart{
+
+        uint256 startTimestamp;
+        uint256 endTimestamp;
         string name;
-        string names;
+        uint256 movingAverage;
+        uint256 high;
+        uint256 low;  
     }
 
-    Character [] public characters;
-    mapping(bytes32 => string) public requestToCharacterName;
-    mapping(bytes32 => address) public  requestToSender;
-
+    PriceChart [] public priceCharts;
     event requestedCharacter(bytes32 indexed requestId);
 
     constructor(address _VRFCoordinator, address _LinkToken, bytes32 _keyHash, address _priceFeed) public  
      VRFConsumerBase(_VRFCoordinator,_LinkToken)
-     ERC721("DungeonsAndDragonsCharacter", "D&D")
+     ERC721("priceChart", "priceChart")
     {
          VRFCoordinator = _VRFCoordinator;
          priceFeed = AggregatorV3Interface(_priceFeed);
          LinkToken = _LinkToken;
          keyHash = _keyHash;
          fee = 0.1 *10**18;  //0.d Link
-    }
-    //function to make a request for randomness fo the VRF 
-    function requestNewRandomCharacter(string memory name)
+    } 
+
+    function generateNewChart(string memory name)
     public returns(bytes32){
         //fund chainLink VRF with Link tokens
         require (
@@ -60,32 +58,34 @@ contract DnDCharacter is ERC721URIStorage , VRFConsumerBase {
         //emit event to easily access requestId when testing or for any other reason
         emit requestedCharacter(requestId);
         return requestId;
+
     }
-    function fulfillRandomness(bytes32 requestId , uint256 randomNumber)
-    internal override
+
+    function fulfillRandomness(bytes32 requestId, uint256 randomNumber)
+        internal
+        override
     {
-        uint256 newId = characters.length;
-        int256 strength = (getLatestPrice()/1000000000);
-        uint dexterity = randomNumber % 100;
-        //keccak256 is a hashfunction
-        uint256 constitution = uint256(keccak256(abi.encode(randomNumber,1))) % 100;
-        uint256 intelligence = uint256(keccak256(abi.encode(randomNumber,2))) % 100;
-        uint256 wisdom =uint256(keccak256(abi.encode(randomNumber,3))) % 100;
-        uint256 charisma =uint256(keccak256(abi.encode(randomNumber,4))) % 100;
-        uint256 experience=0;
-        Character memory character = Character(
-            strength,
-            dexterity,
-            constitution,
-            intelligence,
-            wisdom,
-            charisma,
-            experience,
-            requestToCharacterName[requestId]
+        uint256 newId = priceCharts.length;
+        uint256 experience = 0;
+
+        characters.push(
+            Character(
+                strength,
+                dexterity,
+                constitution,
+                intelligence,
+                wisdom,
+                charisma,
+                experience,
+                requestToCharacterName[requestId]
+            )
         );
-        characters.push(character);
-        _safeMint(requestToSender[requestId],newId);
+        _safeMint(requestToSender[requestId], newId);
     }
+
+    /**
+     * Returns the latest price
+     */
     function getLatestPrice() public view returns (int) {
         (
             uint80 roundID,
@@ -98,5 +98,5 @@ contract DnDCharacter is ERC721URIStorage , VRFConsumerBase {
     }
 
     
-}
 
+}
