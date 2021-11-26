@@ -6,11 +6,9 @@ import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
 contract PriceConsumerV3 {
     AggregatorV3Interface internal priceFeed;
 
-    constructor() {
+    constructor(address ethereumPrice_address) {
         // Rinkeby ETH/USD price feed: 0x8A753747A1Fa494EC906cE90E9f37563A8AF630e
-        priceFeed = AggregatorV3Interface(
-            0x8A753747A1Fa494EC906cE90E9f37563A8AF630e
-        );
+        priceFeed = AggregatorV3Interface(ethereumPrice_address);
     }
 
     function latestRoundData()
