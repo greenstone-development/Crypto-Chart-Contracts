@@ -21,6 +21,8 @@ contract Counter is KeeperCompatibleInterface {
       counter = 0;
     }
 
+    //pull chart info from  NFTStorage and keep it onchain daily
+    
     function checkUpkeep(bytes calldata /* checkData */) external override returns (bool upkeepNeeded, bytes memory /* performData */) {
         upkeepNeeded = (block.timestamp - lastTimeStamp) > interval;
         // We don't use the checkData in this example. The checkData is defined when the Upkeep was registered.
