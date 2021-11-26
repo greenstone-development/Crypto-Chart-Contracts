@@ -38,9 +38,9 @@ contract PriceChart is ERC721URIStorage,AccessControl{
         
         if(hasRole(MINTER_ROLE, owner)){
             _tokenIds.increment();
-            uint256 newChartId = _tokenIds.current();
-             _safeMint(owner, newItemId);
-            _setTokenURI(newItemId, tokenURI);
+            uint256 newChartTokenId = _tokenIds.current();
+            _safeMint(owner, newChartTokenId);
+            _setTokenURI(newChartTokenId, tokenURI);
         }
         //revoke the role after they mint the token so they can not mint it again
         revokeRole(MINTER_ROLE,  owner);
