@@ -1,10 +1,14 @@
 const main = async () => {
+  const [owner] = await hre.ethers.getSigners();
   const cryptoChartsContractFactory = await hre.ethers.getContractFactory(
     "CryptoCharts"
   );
   const cryptoChartsContract = await cryptoChartsContractFactory.deploy();
   await cryptoChartsContract.deployed();
-  console.log(`CryptoChart deployed to ${cryptoChartsContract.address}`);
+
+  console.log(
+    `${owner.address} deployed contract to ${cryptoChartsContract.address}`
+  );
 };
 
 const runMain = async () => {
