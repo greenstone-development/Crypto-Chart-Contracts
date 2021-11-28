@@ -125,3 +125,8 @@ and try to verify again
 ```
 yarn lint:fix
 ```
+
+## Features for the Next Iteration
+1. Adding access control to allow only particular addresses that are token buyers to mint tokens.
+2. Adding Voucher signature pattern to defer gas fees to moment of buying token.
+3. Adding pricing to actually buy cryptocharts
