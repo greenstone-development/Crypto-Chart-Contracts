@@ -39,12 +39,4 @@ contract CryptoCharts is ERC721URIStorage, Ownable {
         emit ChartMinted(msg.sender, tokenId);
         totalMinted.increment();
     }
-
-    /**
-    * getMintedCount : returns total minted tokens front end needs this to pick the charts for display
-    */
-    
-    function getMintedCount() public view returns (uint256) {
-        return totalMinted.current();
-    }
 }
