@@ -1,10 +1,10 @@
 const main = async () => {
-  const cryptoChartContractFactory = await hre.ethers.getContractFactory(
-    "CryptoChart"
+  const cryptoChartsContractFactory = await hre.ethers.getContractFactory(
+    "CryptoCharts"
   );
-  const cryptoChartContract = await cryptoChartContractFactory.deploy();
-  await cryptoChartContract.deployed();
-  console.log(`CryptoChart deployed to ${cryptoChartContract.address}`);
+  const cryptoChartsContract = await cryptoChartsContractFactory.deploy();
+  await cryptoChartsContract.deployed();
+  console.log(`CryptoChart deployed to ${cryptoChartsContract.address}`);
 };
 
 const runMain = async () => {
