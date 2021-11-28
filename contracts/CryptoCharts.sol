@@ -17,7 +17,7 @@ contract CryptoCharts is ERC721URIStorage, Ownable {
    
     /**
     * addChart : Adds chart IPFS link to string array holding IPFS links]
-    * @param  {string memory} IPFSlink : IPFS link string of format ipfs://wewewrdfadfsdsdfdsdffsdf/metadata.json
+    * @param  ipfsLink  IPFS link string of format ipfs://wewewrdfadfsdsdfdsdffsdf/metadata.json
     */
 
     function addChart(string memory ipfsLink) external onlyOwner {
@@ -27,7 +27,7 @@ contract CryptoCharts is ERC721URIStorage, Ownable {
 
      /**
     * mintChart : function called to mintPriceCart token ,emits event chartMinted that could be used testing purposes
-    * @param  {uint256} tokenId : token id is based on index of the 'ipfsLinks' string array
+    * @param tokenId : token id is based on index of the 'ipfsLinks' string array
     */
 
     function mintChart(uint256 tokenId) public {
