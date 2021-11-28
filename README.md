@@ -2,7 +2,7 @@
 
 - [NPM](https://www.npmjs.com/) or [YARN](https://yarnpkg.com/)
 
-### About CryptoChartContracts
+## About CryptoChartContracts
 
 It is essentially a smart contract that an address  can call to mint unique bitcoin price charts and own the token to the chart.
 Anyone can mint bitcoin price charts here for free!
@@ -19,14 +19,16 @@ Anyone can mint bitcoin price charts here for free!
 
 
 
-### Where to Start
+## Contributing to the code
 
+### Clone
 ```bash
 git clone https://github.com/greenstone-development/Crypto-Chart-Contracts
 cd Crypto-Chart-Contracts
 ```
 then
 
+### Install dependencies
 ```bash
 npm install
 ```
@@ -37,11 +39,11 @@ Or
 yarn
 ```
 
-## Compile
+### Compile
 ```bash
 npx hardhat compile
 ```
-## Deploy
+### Deploy
 
 Deployment scripts are in the [deploy](https://github.com/greenstone-development/Crypto-Chart-Contracts/deploy) directory. If required, edit the desired environment specific variables or constructor parameters in each script, then run the hardhat deployment plugin as follows. If no network is specified, it will default to the Kovan network.
 
@@ -57,7 +59,7 @@ To deploy to testnet:
 npx hardhat deploy --network rinkeby
 ```
 
-## Test
+### Test
 Tests should be located in the [test](https://github.com/greenstone-development/Crypto-Chart-Contracts/test) directory, and are split between unit tests and integration tests. Unit tests should only be run on local environments, and integration tests should only run on live environments.
 
 To run unit tests:
@@ -72,7 +74,7 @@ To run integration tests:
 yarn test-integration
 ```
 
-## Run
+### Run
 
 The deployment output will give you the contract addresses as they are deployed. You can then use these contract addresses in conjunction with Hardhat tasks to perform operations on each contract.
 
@@ -87,7 +89,7 @@ If you plan on deploying to a local [Hardhat network](https://hardhat.org/hardha
 You can also use a `PRIVATE_KEY` instead of a `MNEMONIC` environment variable by uncommenting the section in the `hardhat.config.js`, and commenting out the `MNEMONIC` line.
 
 
-### Chainlink Price Feeds
+## Chainlink Price Feeds
 The Price Feeds consumer contract has one task, to read the latest price of a specified price feed contract
 
 ```bash
@@ -106,6 +108,17 @@ example:
 ```
 npx hardhat verify --network rinkeby 0x9279791897f112a41FfDa267ff7DbBC46b96c296 "0x9326BFA02ADD2366b30bacB125260Af641031331"
 ```
+
+sometimes verifying may give you a bizarre error  that looks like this 
+[Error: ENOENT: no such file or directory, open '/Users/<user>/<directory>/NFT-demos/crypto-charts-contracts/artifacts/build-info/d4c83a0b3e1f40f4c5980f3173aa6683.json']
+
+just run
+
+```
+npx hardhat clean
+
+```
+and try to verify again
 
 ### Linting
 
