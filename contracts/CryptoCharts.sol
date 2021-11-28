@@ -11,15 +11,24 @@ contract CryptoCharts is ERC721URIStorage, Ownable {
     Counters.Counter public totalSupply;
 
     string[] public ipfsLinks;
-
     event ChartMinted(address sender, uint256 tokenId);
-
     constructor() ERC721("CryptoCharts", "CC") {}
+
+   
+    /**
+    * addChart : Adds chart IPFS link to string array holding IPFS links]
+    * @param  {string memory} IPFSlink : IPFS link string of format ipfs://wewewrdfadfsdsdfdsdffsdf/metadata.json
+    */
 
     function addChart(string memory ipfsLink) external onlyOwner {
         ipfsLinks.push(ipfsLink);
         totalSupply.increment();
     }
+
+     /**
+    * mintChart : function called to mintPriceCart token ,emits event chartMinted that could be used testing purposes
+    * @param  {uint256} tokenId : token id is based on index of the 'ipfsLinks' string array
+    */
 
     function mintChart(uint256 tokenId) public {
         require(tokenId < totalSupply.current(), "Token ID is out of range");
@@ -31,6 +40,10 @@ contract CryptoCharts is ERC721URIStorage, Ownable {
         totalMinted.increment();
     }
 
+    /**
+    * getMintedCount : returns total minted tokens front end needs this to pick the charts for display
+    */
+    
     function getMintedCount() public view returns (uint256) {
         return totalMinted.current();
     }

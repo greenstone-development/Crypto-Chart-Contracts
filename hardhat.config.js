@@ -26,21 +26,10 @@ const MAINNET_RPC_URL =
   process.env.MAINNET_RPC_URL ||
   process.env.ALCHEMY_MAINNET_RPC_URL ||
   "https://eth-mainnet.alchemyapi.io/v2/your-api-key";
-const RINKEBY_RPC_URL =
-  process.env.RINKEBY_RPC_URL ||
-  "https://eth-rinkeby.alchemyapi.io/v2/your-api-key";
-const KOVAN_RPC_URL =
-  process.env.KOVAN_RPC_URL ||
-  "https://eth-kovan.alchemyapi.io/v2/your-api-key";
-const MUMBAI_RPC_URL =
-  process.env.MUMBAI_RPC_URL ||
-  "https://polygon-mumbai.alchemyapi.io/v2/your-api-key";
-const POLYGON_MAINNET_RPC_URL =
-  process.env.POLYGON_MAINNET_RPC_URL ||
-  "https://polygon-mainnet.alchemyapi.io/v2/your-api-key";
+const RINKEBY_RPC_URL = process.env.ALCHEMY_RINKEBY_URL || "https://eth-rinkeby.alchemyapi.io/v2/your-api-key";
 const MNEMONIC = process.env.MNEMONIC || "your mnemonic";
-const ETHERSCAN_API_KEY =
-  process.env.ETHERSCAN_API_KEY || "Your etherscan API key";
+const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY || "Your etherscan API key";
+
 // optional
 const PRIVATE_KEY = process.env.PRIVATE_KEY || "your private key";
 
@@ -54,14 +43,7 @@ module.exports = {
       // }
     },
     localhost: {},
-    kovan: {
-      url: KOVAN_RPC_URL,
-      accounts: [PRIVATE_KEY],
-      // accounts: {
-      //     mnemonic: MNEMONIC,
-      // },
-      saveDeployments: true,
-    },
+    
     rinkeby: {
       url: RINKEBY_RPC_URL,
       accounts: [PRIVATE_KEY],
@@ -84,16 +66,7 @@ module.exports = {
       },
       saveDeployments: true,
     },
-    mumbai: {
-      url: MUMBAI_RPC_URL,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
-    polygon: {
-      url: POLYGON_MAINNET_RPC_URL,
-      accounts: [PRIVATE_KEY],
-      saveDeployments: true,
-    },
+   
   },
   etherscan: {
     // Your API key for Etherscan
