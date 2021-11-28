@@ -2,6 +2,13 @@
 
 - [NPM](https://www.npmjs.com/) or [YARN](https://yarnpkg.com/)
 
+### About CryptoChartContracts
+
+It is essentially a smart contract that an address  can call to mint unique bitcoin price charts and own the token to the chart.
+Anyone can mint bitcoin price charts here for free!
+
+
+
 
 ### Setting Environment Variables
 You can set these in your `.env` file if you're unfamiliar with how setting environment variables work. Check out our [.env example](https://github.com/greenstone-development/Crypto-Chart-Contracts/blob/main/.env.example). If you wish to use this method to set these variables, update the values in the .env.example file, and then rename it to '.env'
