@@ -7,17 +7,17 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract CryptoCharts is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
-    Counters.Counter private totalMinted;
+    Counters.Counter public totalMinted;
     Counters.Counter public totalSupply;
 
-    mapping(uint256 => string) public tokenIdToIPFS;
+    string[] public ipfsLinks;
 
-    event ChartMinted(address sender, uint256 mapIndex);
+    event ChartMinted(address sender, uint256 tokenId);
 
     constructor() ERC721("CryptoCharts", "CC") {}
 
-    function addChart(uint256 tokenId, string memory ipfsLink) external onlyOwner {
-        tokenIdToIPFS[tokenId] = ipfsLink;
+    function addChart(string memory ipfsLink) external onlyOwner {
+        ipfsLinks.push(ipfsLink);
         totalSupply.increment();
     }
 
@@ -25,7 +25,7 @@ contract CryptoCharts is ERC721URIStorage, Ownable {
         require(tokenId < totalSupply.current(), "Token ID is out of range");
 
         _safeMint(msg.sender, tokenId);
-        _setTokenURI(tokenId, tokenIdToIPFS[tokenId]);
+        _setTokenURI(tokenId, ipfsLinks[tokenId]);
 
         emit ChartMinted(msg.sender, tokenId);
         totalMinted.increment();
