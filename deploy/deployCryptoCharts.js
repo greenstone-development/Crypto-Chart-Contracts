@@ -13,7 +13,7 @@ module.exports = async ({
   let tokenURI ="https://gateway.pinata.cloud/ipfs/QmXRksE99CTW8yu6KyzsjKucS7GF2bznLmxkW1npZKkFoF";
   
 
-  const PriceChart = await deploy('PriceChart', {
+  const CryptoChart = await deploy('CryptoChart', {
     from: deployer,
     args: [ownerAddress, tokenURI], 
     log: true
@@ -21,9 +21,9 @@ module.exports = async ({
 
  
   log("To generate a character run the following:")
-  log("npx hardhat generate-character --contract " + PriceChart.address + " --name InsertNameHere " +  " --network " + networkConfig[chainId]['name'])
+  log("npx hardhat generate-character --contract " + CryptoChart.address + " --name InsertNameHere " +  " --network " + networkConfig[chainId]['name'])
   log("To get a character's details as metadata run the following:")
-  log("npx hardhat create-metadata --contract " +PriceChart.address + " --network " + networkConfig[chainId]['name'])
+  log("npx hardhat create-metadata --contract " +CryptoChart.address + " --network " + networkConfig[chainId]['name'])
   log("----------------------------------------------------")
 }
 
