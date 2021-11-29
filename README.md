@@ -130,3 +130,9 @@ yarn lint:fix
 1. Adding access control to allow only particular addresses that are token buyers to mint tokens.
 2. Adding Voucher signature pattern to defer gas fees to moment of buying token.
 3. Adding pricing to actually buy cryptocharts
+
+## Architecture 
+
+<div align="center">
+    <img src="./arch.png" width="600" height="450">
+</div>
